@@ -1,0 +1,11 @@
+{
+  "name": "qrng-api3",
+  "version": "1.0.0",
+  "description": "Smart contracts connecting QuantumBlockchains QRNG API with API3",
+  "main": "index.js",
+  "author": "QuantumBlockchains",
+  "license": "MIT",
+  "devDependencies": {
+    "hardhat": "^2.12.5"
+  }
+}

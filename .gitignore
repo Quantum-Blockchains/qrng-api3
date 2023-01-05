@@ -1,0 +1,13 @@
+.idea
+node_modules
+.env
+coverage
+coverage.json
+.yarn
+
+# Hardhat files
+cache
+artifacts
+deployments
+typechain-types
+.docs
