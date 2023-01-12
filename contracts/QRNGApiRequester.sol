@@ -13,7 +13,7 @@ contract QRNGApiRequester is RrpRequesterV0 {
 
     /// @notice makes request to QRNG API
     /// @param _provider - supported providers: qbck, qnulabs, sequre, realrandom
-    /// @param _type - supported types: short (uint16), int (uint32), long (uint64)
+    /// @param _type - supported types: short (uint16), int (uint32), long (uint64), bigint (uint128)
     /// @param _size - quantity of random numbers to generate
     function makeRequest(
         address airnode,
@@ -50,17 +50,19 @@ contract QRNGApiRequester is RrpRequesterV0 {
 
     /// @notice Encodes params for making request to QBCK API
     /// @param _provider - supported providers: qbck, qnulabs, sequre, realrandom
-    /// @param _type - supported types: short (uint16), int (uint32), long (uint64)
+    /// @param _type - supported types: short (uint16), int (uint32), long (uint64), bigint (uint256)
     /// @param _size - quantity of random numbers to generate
     function _encodeParams(bytes32 _provider, bytes32 _type, uint _size) private pure returns (bytes memory) {
         return abi.encode(
-            bytes32("1SSS"),
+            bytes32("1SSSS"),
             bytes32("provider"),
             _provider,
             bytes32("type"),
             _type,
             bytes32("size"),
-            _size
+            _size,
+            bytes32("length"),
+            32
         );
     }
 }
