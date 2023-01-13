@@ -74,8 +74,7 @@ describe(QRNG_API_REQUESTER, () => {
 
         // make request to for random numbers
         await qrngApiRequester.makeRequest(airnode, '0x9b50a620b157676e7aac88732dbe117297e9127454d8a8575a962fc77b580569',
-          sponsor, sponsorWallet, formatBytes32String(params.provider),
-          formatBytes32String(params.type), params.size);
+          sponsor, sponsorWallet, params.provider, params.type, params.size);
 
         // incoming fulfillment is in the contract
         let incomingFulfilment = await qrngApiRequester.incomingFulfillments(formatBytes32String('1'));

@@ -33,7 +33,6 @@ const config: HardhatUserConfig = {
     goerli: {
       url: GOERLI_URL,
       accounts: [GOERLI_PRIVATE_KEY],
-      gasPrice: 20_000_000_000
     }
   },
   namedAccounts: {

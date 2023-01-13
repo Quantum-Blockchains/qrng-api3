@@ -2,6 +2,8 @@
 pragma solidity 0.8.9;
 
 import "@api3/airnode-protocol/contracts/rrp/requesters/RrpRequesterV0.sol";
+import "@openzeppelin/contracts/utils/Strings.sol";
+
 
 /// @notice contract handling QuantumBlockchains QRNG API communication
 contract QRNGApiRequester is RrpRequesterV0 {
@@ -20,11 +22,11 @@ contract QRNGApiRequester is RrpRequesterV0 {
         bytes32 endpointId,
         address sponsor,
         address sponsorWallet,
-        bytes32 _provider,
-        bytes32 _type,
-        uint _size
+        string memory _provider,
+        string memory _type,
+        uint256 _size
     ) external {
-        bytes memory parameters = _encodeParams(_provider, _type, _size);
+        bytes memory parameters = encodeParams(_provider, _type, _size);
         bytes32 requestId = airnodeRrp.makeFullRequest(
             airnode,
             endpointId,
@@ -52,7 +54,7 @@ contract QRNGApiRequester is RrpRequesterV0 {
     /// @param _provider - supported providers: qbck, qnulabs, sequre, realrandom
     /// @param _type - supported types: short (uint16), int (uint32), long (uint64), bigint (uint256)
     /// @param _size - quantity of random numbers to generate
-    function _encodeParams(bytes32 _provider, bytes32 _type, uint _size) private pure returns (bytes memory) {
+    function encodeParams(string memory _provider, string memory _type, uint256 _size) public pure returns (bytes memory) {
         return abi.encode(
             bytes32("1SSSS"),
             bytes32("provider"),
@@ -60,9 +62,9 @@ contract QRNGApiRequester is RrpRequesterV0 {
             bytes32("type"),
             _type,
             bytes32("size"),
-            _size,
+            Strings.toString(_size),
             bytes32("length"),
-            32
+            Strings.toString(uint256(32))
         );
     }
 }
